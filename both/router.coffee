@@ -33,6 +33,10 @@ Router.map ->
     path: "/profile"
     waitOn: ->
       Meteor.subscribe 'profilePictures'
+  @route "serviceprovider",
+    path: "/serviceprovider"
+    waitOn: ->
+      Meteor.subscribe 'serviceproviders'
   @route "account",
     path: "/account"
     onStop: ->
@@ -78,7 +82,7 @@ saveRedirectUrl = ->
       Session.set 'redirectToAfterSignIn', @url
   @next()
 
-publicRoutes = _.union Config.publicRoutes, ['entrySignIn','entrySignUp','entryForgotPassword']
+publicRoutes = _.union Config.publicRoutes, ['serviceprovider','entrySignIn','entrySignUp','entryForgotPassword']
 Router.onBeforeAction saveRedirectUrl, {except: _.union publicRoutes, ['entrySignOut']}
 Router.onBeforeAction signInRequired, {except: publicRoutes}
 

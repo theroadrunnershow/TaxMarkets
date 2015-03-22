@@ -1,7 +1,7 @@
 @Config =
-	name: 'My App'
-	title: 'Make Meteor Apps. Fast.'
-	subtitle: 'A boilerplate from MeteorFactory.io'
+	name: 'Taxmarkets'
+	title: 'Find Professional Tax Help. Fast.'
+	subtitle: 'A dedicated marketplace to find professional tax and financial advice near you.'
 	logo: ->
 		'<b>' + @name + '</b>'
 	footer: ->

@@ -1,3 +1,11 @@
+ServiceProviders.allow
+	insert: (userId, doc) ->
+		true
+	update: (userId, doc, fields, modifier) ->
+		userId == doc.owner
+	remove: (userId, doc) ->
+		userId == doc.owner
+		
 ProfilePictures.allow
 	insert: (userId, doc) ->
 		true

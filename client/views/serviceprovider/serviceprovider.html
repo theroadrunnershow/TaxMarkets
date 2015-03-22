@@ -1,0 +1,40 @@
+<template name="serviceprovider">
+	<div class="container">
+		<div class="row" id="champion-messages">
+			<div class="col-md-2">
+
+			</div>
+			<div class="col-md-8">
+				{{> create}}
+			</div>
+			<div class="col-md-2">
+
+			</div>
+		</div>
+	</div>
+</template>
+<template name="create">
+	<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Create your profile!</h3>
+			</div>
+			<div class="panel-body">
+				{{#autoForm id="add" collection="ServiceProviders" type="insert"}}
+				{{> afQuickField name="email"}}
+				{{> afQuickField name="password"}}
+				{{> afQuickField name="businessname"}}
+				{{> afQuickField name="contactname"}}
+				{{> afQuickField name="phone"}}
+				{{> afQuickField name="address1"}}
+				{{> afQuickField name="address2"}}
+				{{> afQuickField name="city"}}
+				{{> afQuickField name="state"}}
+				{{> afQuickField name="country"}}
+				{{> afQuickField name="tin"}}
+				{{> afFormGroup name="specialities"}}
+				{{> afQuickField name="businessdesc"}}
+				<button type="submit" class="btn btn-primary">Create Profile!</button>
+				{{/autoForm}}
+			</div>
+	</div>
+</template>

@@ -3,3 +3,6 @@ Meteor.publish 'posts', ->
 
 Meteor.publish 'attachments', ->
 	Attachments.find()
+
+Meteor.publish 'serviceproviders', ->
+	ServiceProviders.find()
