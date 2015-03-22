@@ -1,18 +1,40 @@
 <template name="serviceprovider">
 	<div class="container">
-		<div class="row" id="champion-messages">
-			<div class="col-md-2">
-
+		<div class="row">
+			<div class="col-md-4">
+				{{> marketingmessage}}
+				{{> contactus}}
 			</div>
 			<div class="col-md-8">
 				{{> create}}
 			</div>
-			<div class="col-md-2">
-
-			</div>
 		</div>
 	</div>
 </template>
+
+<template name="marketingmessage">
+	<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Why join us?</h3>
+			</div>
+			<div class="panel-body">
+				<p>Fancy marketing message.</p>
+			</div>
+	</div>
+</template>
+
+<template name="contactus">
+	<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Need Help?</h3>
+			</div>
+			<div class="panel-body">
+				<p>Call us at 734-358-6357.</p>
+				<p>Or Email us at TaxMarkets@googlegroups.com</p>
+			</div>
+	</div>
+</template>
+
 <template name="create">
 	<div class="panel panel-default">
 			<div class="panel-heading">
