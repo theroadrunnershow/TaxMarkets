@@ -1,20 +1,32 @@
-@ServiceProviders = new Meteor.Collection('serviceproviders');
+@ServiceProviders = new Mongo.Collection('serviceproviders');
 
 Schemas.ServiceProviders = new SimpleSchema
 	email:
 		type:String
 		label:'Email Address'
+		autoValue: ->
+			if this.isInsert or this.isUpdate
+				Meteor.user().emails[0].address
 		autoform:
 			afFieldInput:
 				type: 'email'
 
-	password:
+	location:
 		type:String
-		label:'Password'
+		label: 'Location of Office'
 		autoform:
+			type: 'map'
 			afFieldInput:
-				type: 'password'
-
+				type: 'map'
+				geolocation: true
+				searchBox: true
+				autolocate: true
+	
+	officeaddress:
+		type:String
+		label: 'Address as shown in your profile'
+		optional: true
+					
 	createdAt: 
 		type: Date
 		autoValue: ->
@@ -23,9 +35,8 @@ Schemas.ServiceProviders = new SimpleSchema
 
 	updatedAt:
 		type:Date
-		optional:true
 		autoValue: ->
-			if this.isUpdate
+			if this.isInsert or this.isUpdate
 				new Date()
 
 	businessname:
@@ -36,31 +47,10 @@ Schemas.ServiceProviders = new SimpleSchema
 		type:String
 		label:'Contact Full Name'
 
-	address1:
-		type:String
-		label:'Address (Line 1)'
-		
-	address2:
-		type:String
-		label:'Address (Line 2)'
-		optional: true
-		
-	city:
-		type:String
-		label:'City'
-	
-	state:
-		type:String
-		label:'State'
-		
-	country:
-		type:String
-		label:'Country'
 		
 	tin:
 		type:String
 		label:'TIN Number'
-		optional: true
 		
 	specialities:
 		type: [String]
@@ -73,8 +63,27 @@ Schemas.ServiceProviders = new SimpleSchema
 					[
           			  	{label: "Tax – Appeals and Representation", value: "Tax – Appeals and Representation"},
           				{label: "Tax – Business", value: "Tax – Business"},
-          		  		{label: "Tax – Comprehensive", value: "Tax – Comprehensive"}
-        	  		]
+          		  		{label: "Tax – Comprehensive", value: "Tax – Comprehensive"},
+						{label: "Tax – Consolidated Returns", value: "Tax – Consolidated Returns"},
+						{label: "Tax – Consulting", value: "Tax – Consulting"},
+						{label: "Tax – Corporate", value: "Tax – Corporate"},
+						{label: "Tax – Divorce", value: "Tax – Divorce"},
+						{label: "Tax – High Net Worth Individuals", value: "Tax – High Net Worth Individuals"},
+						{label: "Tax – Individuals", value: "Tax – Individuals"},
+						{label: "Tax – International", value: "Tax – International"},
+						{label: "Tax – Late/Back Year Taxes", value: "Tax – Late/Back Year Taxes"},
+						{label: "Tax – LLC/LLP", value: "Tax – LLC/LLP"},
+						{label: "Tax – Multi-State Returns", value: "Tax – Multi-State Returns"},
+						{label: "Tax – Non-Resident/Foreign Returns", value: "Tax – Non-Resident/Foreign Returns"},
+						{label: "Tax – Offers in Compromise", value: "Tax – Offers in Compromise"},
+						{label: "Tax – Post Mortem Planning", value: "Tax – Post Mortem Planning"},
+						{label: "Tax – Real/Personal Property Taxes", value: "Tax – Real/Personal Property Taxes"},
+						{label: "Tax – Reorganizations", value: "Tax – Reorganizations"},
+						{label: "Tax – Sales Taxes", value: "Tax – Sales Taxes"},
+						{label: "Tax – Stock Options", value: "Tax – Stock Options"},
+						{label: "Tax – Value Added Tax (VAT)", value: "Tax – Value Added Tax (VAT)"},
+						{label: "Tax – Bankruptcy", value: "Tax – Bankruptcy"}
+					]
 	
 	businessdesc:
 		type:String

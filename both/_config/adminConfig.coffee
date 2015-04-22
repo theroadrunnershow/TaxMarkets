@@ -21,7 +21,7 @@ AdminConfig =
             ]
 		}
 	dashboard:
-		homeUrl: '/dashboard'
+		homeUrl: '/serviceproviders'
 		# widgets: [
 		# 	{
 		# 		template: 'adminCollectionWidget'

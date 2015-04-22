@@ -31,14 +31,19 @@ yogiben:pretty-emails
 yogiben:pretty-email
 yogiben:autoform-file
 yogiben:admin
-yogiben:autoform-map@0.0.2
+yogiben:autoform-map
 multiply:iron-router-progress
 manuelschoebel:ms-seo
 spiderable
-accounts-facebook
 accounts-google
 accounts-twitter
 bootstrap
 accounts-ui
 
 jparker:gravatar
+accounts-facebook
+http
+matb33:collection-hooks
+email
+mdg:geolocation
+meteorhacks:search-source

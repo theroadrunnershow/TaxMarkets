@@ -1,62 +1,73 @@
 <template name="serviceprovider">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-4">
-				{{> marketingmessage}}
-				{{> contactus}}
-			</div>
-			<div class="col-md-8">
-				{{> create}}
-			</div>
-		</div>
+<div class="container">
+	<div class="row">
+		<div class="col-md-4">{{> marketingmessage}} {{> contactus}}</div>
+		<div class="col-md-8">{{> createprovider}}</div>
 	</div>
+</div>
 </template>
 
 <template name="marketingmessage">
-	<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title">Why join us?</h3>
-			</div>
-			<div class="panel-body">
-				<p>Fancy marketing message.</p>
-			</div>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">Why join us?</h3>
 	</div>
+
+	<div class="panel-body">
+		<p>Fancy marketing message.</p>
+	</div>
+</div>
 </template>
 
 <template name="contactus">
-	<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title">Need Help?</h3>
-			</div>
-			<div class="panel-body">
-				<p>Call us at 734-358-6357.</p>
-				<p>Or Email us at TaxMarkets@googlegroups.com</p>
-			</div>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">Need Help?</h3>
 	</div>
+	<div class="panel-body">
+		<p>Call us at 734-358-6357.</p>
+		<p>Or Email us at TaxMarkets@googlegroups.com</p>
+	</div>
+</div>
 </template>
 
-<template name="create">
-	<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title">Create your profile!</h3>
-			</div>
-			<div class="panel-body">
-				{{#autoForm id="add" collection="ServiceProviders" type="insert"}}
-				{{> afQuickField name="email"}}
-				{{> afQuickField name="password"}}
-				{{> afQuickField name="businessname"}}
-				{{> afQuickField name="contactname"}}
-				{{> afQuickField name="phone"}}
-				{{> afQuickField name="address1"}}
-				{{> afQuickField name="address2"}}
-				{{> afQuickField name="city"}}
-				{{> afQuickField name="state"}}
-				{{> afQuickField name="country"}}
-				{{> afQuickField name="tin"}}
-				{{> afFormGroup name="specialities"}}
-				{{> afQuickField name="businessdesc"}}
-				<button type="submit" class="btn btn-primary">Create Profile!</button>
-				{{/autoForm}}
-			</div>
-	</div>
+<template name="createprovider">
+<div class="panel panel-default">
+	   {{#if selectedProvider}}
+		<div class="panel-heading">
+			<h3 class="panel-title">{{currentUser.emails.[0].address}}'s profile</h3>
+		</div>
+	   <div class="panel-body">
+			{{#autoForm class="editf" id="editf" collection="ServiceProviders" type="update" doc=selectedProvider}} 
+			{{> afQuickField name="businessname"}} 
+			{{> afQuickField name="contactname"}} 
+			{{> afQuickField name="phone"}} 
+			{{> afQuickField name="location"}}
+			{{> afQuickField name="officeaddress"}}
+			{{> afQuickField name="tin"}} 
+			{{> afFormGroup name="specialities"}} 
+			{{> afQuickField name="businessdesc"}}
+			<button type="submit" class="btn btn-primary">Update your profile</button>
+			{{/autoForm}}
+		</div>
+		
+     	{{else}}
+		<div class="panel-heading">
+			<h3 class="panel-title">Create your TaxMarkets profile</h3>
+		</div>
+		<div class="panel-body">
+			{{#autoForm class="add" id="add" collection="ServiceProviders" type="insert"}} 
+			{{> afQuickField name="businessname"}} 
+			{{> afQuickField name="contactname"}} 
+			{{> afQuickField name="phone"}} 
+			{{> afQuickField name="location"}}
+			{{> afQuickField name="tin"}} 
+			{{> afFormGroup name="specialities"}} 
+			{{> afQuickField name="businessdesc"}}
+			<button type="submit" class="btn btn-primary">Create Profile!</button>
+			{{/autoForm}}
+        </div>
+        {{/if}}
+
+</div>
 </template>

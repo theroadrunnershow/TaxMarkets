@@ -12,17 +12,14 @@
 	about: 'http://meteorfactory.io'
 	username: false
 	homeRoute: '/'
-	dashboardRoute: '/dashboard'
+	dashboardRoute: '/'
 	socialMedia:
 		facebook:
-			url: 'http://facebook.com/benjaminpeterjones'
+			url: 'https://www.facebook.com/abhishek.sunku'
 			icon: 'facebook'
 		twitter:
-			url: 'http://twitter.com/BenPeterJones'
+			url: 'http://twitter.com/asunku'
 			icon: 'twitter'
-		github:
-			url: 'http://github.com/yogiben'
-			icon: 'github'
 		info:
 			url: 'http://meteorfactory.io'
 			icon: 'link'
