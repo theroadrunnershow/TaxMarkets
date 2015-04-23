@@ -1,0 +1,34 @@
+<template name="createdprovider">
+<div class="container">
+	<div class="row">
+		<div class="col-md-4">{{> marketingmessage}} {{> contactus}}</div>
+		<div class="col-md-8">{{> successfulCreation}}</div>
+		<div class="col-md-8">{{> providerDetailsCreated}}</div>
+	</div>
+</div>
+</template>
+
+<template name="successfulCreation">
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">You should hear from us soon!</h3>
+	</div>
+
+	<div class="panel-body">
+		<p>Our team will review the information you have submitted. Expect to hear back from us soon.</p>
+	</div>
+</div>
+</template>
+
+<template name="providerDetailsCreated">
+<div class="panel panel-default" id="serviceProviderCreatedMessage" style="max-height:200px;overflow:auto;">
+	<div class="panel-heading">
+		<h3 class="panel-title">You can edit your profile for {{businessname}} if needed by clicking the button below.</h3>
+	</div>
+	<div class="panel-body">
+		{{#autoForm id="viewdetails" collection="ServiceProviders" type="readonly" doc=this}} 
+		<button id="editbtn" class="btn btn-primary backtoprofile">Edit your profile</button>
+		{{/autoForm}}
+	</div>
+</div>
+</template>

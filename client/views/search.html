@@ -1,0 +1,61 @@
+<template name="searchBox">
+  {{#autoForm class="form-inline" schema=searchSchema id="searchForm" 
+  type="method" meteormethod="searchQuery" afFieldInput-placeholder="schemaLabel"}}
+	{{> afQuickField name="speciality" placeholder="schemaLabel" id="specialityDropdown"}}
+	<div class="form-group">
+		<input id="zipcode" type="number" name="zipcode" placeholder="Zipcode" data-schema-key="zipcode" class="form-control">    
+		<span class="help-block"></span>
+	</div>
+	{{> afQuickField name="radius" id="radius"}}
+    <div class="form-group"  style="vertical-align: 20%;">
+      <input id="submitSearch" name="submit" type="submit" value="Search" />
+    </div>  
+  {{/autoForm}}
+</template>
+
+<template name="searchResult">
+  <div id='search-result'>
+    <div id="search-meta">
+      {{#if isLoading}}
+        searching ...
+      {{/if}}
+    </div>
+
+    {{#each getServiceProviders}}
+    <div class="package">
+      <h4 class="name">
+        <span>{{{contactname}}}</span>
+      </h4>
+      <div class="description">
+        {{{businessname}}}
+      </div>
+    </div>
+    {{/each}}
+  </div>
+</template>
+
+<template name="serviceproviders">
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">Search for Tax and Financial Professionals Near You!</h3>
+	</div>
+	<div class="panel-body">
+			<!-- Create pagination here.
+				{{#each serviceProviderList}} 
+					{{> serviceproviderlistdetail}}
+				{{/each}}
+			 -->
+			{{> searchBox }}
+	</div>
+</div>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">Found XX professionals</h3>
+	</div>
+	<div class="panel-body">
+		{{> searchResult }}
+	</div>
+</div>
+{{> contactus}} 
+</template>
+
