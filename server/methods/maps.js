@@ -3,7 +3,7 @@ Meteor.methods({
 		if((doc.officeaddress === undefined || doc.officeaddress == null || doc.officeaddress.length <= 0) ? true : false){
 		  HTTP.call("get",
 					"https://maps.googleapis.com/maps/api/geocode/json?latlng="
-					+ doc.officelocation, function(error, result) {
+					+ doc.officelocation+"&key=AIzaSyD_a9DwOndfi4_5pyOAKcn0xIT-FqCHT_I", function(error, result) {
 				if(error){
 					console.log('Reverse Geocoding Failed because: '+error.reason);
 				}
@@ -15,7 +15,7 @@ Meteor.methods({
 		}
 		if((doc.officelocation === undefined || doc.officelocation == null || doc.officelocation.length <= 0) ? true : false){
 			  HTTP.call("get",
-						"https://maps.googleapis.com/maps/api/geocode/json?address="+doc.officeaddress, function(error, result) {
+						"https://maps.googleapis.com/maps/api/geocode/json?address="+doc.officeaddress+"&key=AIzaSyD_a9DwOndfi4_5pyOAKcn0xIT-FqCHT_I", function(error, result) {
 					if(error){
 						console.log('Reverse Geocoding Failed because: '+error.reason);
 					}
