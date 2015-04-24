@@ -7,7 +7,6 @@ Template.home.events({
 	  Router.go("/serviceprovider");
   },
   'submit #submitSearch' : function(e) {
-	  console.log(Geolocation.latLng());
 		if (AutoForm.validateForm('searchForm')) {
 			Router.go('/createdprovider');
 		}

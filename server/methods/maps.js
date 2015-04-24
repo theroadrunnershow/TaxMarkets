@@ -3,37 +3,44 @@ Meteor.methods({
 		if((doc.officeaddress === undefined || doc.officeaddress == null || doc.officeaddress.length <= 0) ? true : false){
 		  HTTP.call("get",
 					"https://maps.googleapis.com/maps/api/geocode/json?latlng="
-					+ doc.location, function(error, result) {
+					+ doc.officelocation, function(error, result) {
 				if(error){
 					console.log('Reverse Geocoding Failed because: '+error.reason);
 				}
-			  	var officeLocationFormattedAddress = '';
-				officeLocationFormattedAddress = result.data.results[0].formatted_address;
-				ServiceProviders.update({_id: doc._id}, {$set: {officeaddress:officeLocationFormattedAddress}});
+			  	
+			  	var officeLocationFormattedAddress = result.data.results[0].formatted_address;
+				ServiceProviders.update({_id: doc._id}, {$set: {officeaddress:officeLocationFormattedAddress }});
 				console.log("Updated address =" + officeLocationFormattedAddress);
 			});	
 		}
-		if((doc.location === undefined || doc.location == null || doc.location.length <= 0) ? true : false){
+		if((doc.officelocation === undefined || doc.officelocation == null || doc.officelocation.length <= 0) ? true : false){
 			  HTTP.call("get",
 						"https://maps.googleapis.com/maps/api/geocode/json?address="+doc.officeaddress, function(error, result) {
 					if(error){
 						console.log('Reverse Geocoding Failed because: '+error.reason);
 					}
-				  	var latlong = '';
-				  	latlong = result.data.results[0].geometry.location.lat+','+result.data.results[0].geometry.location.lng;
-					ServiceProviders.update({_id: doc._id}, {$set: {location:latlong}});
-					console.log("Updated lat long =" + latlong);
+				  	var latlong = result.data.results[0].geometry.location.lat+','+result.data.results[0].geometry.location.lng;
+				  	doc.officelocation=latlong;
+				  	
 				});	
 			}
 	}
 });
 
-ServiceProviders.after.insert(function (userId, doc) {
-  console.log("Updating address for inserted ServiceProvider _id=" + doc._id + ", officeaddress="+doc.officeaddress + " , location="+doc.location);
-  Meteor.call('UpdateAddressAndLocation', userId, doc);
+ServiceProviders.before.insert(function (userId, doc) {
+	doc.location = {
+			type:"Point",
+			coordinates: {
+				lng:Number((doc.officelocation.split(","))[1]),
+				lat:Number((doc.officelocation.split(","))[0])
+			}};
 });
 
-ServiceProviders.after.update(function (userId, doc) {
-	  console.log("Updating address for updated ServiceProvider _id=" + doc._id + ", officeaddress="+doc.officeaddress + " , location="+doc.location);
-	  Meteor.call('UpdateAddressAndLocation', userId, doc);
-	});
+ServiceProviders.after.insert(function (userId, doc) {
+	Meteor.call('UpdateAddressAndLocation', userId, doc);
+});
+
+// Check if can remove.
+ServiceProviders.before.update(function (userId, doc) {
+	Meteor.call('UpdateAddressAndLocation', userId, doc);
+});

@@ -15,14 +15,19 @@ SearchSource.defineSource('serviceproviders', function(chosenSpeciality, options
 	if((options.zipcode === undefined || options.zipcode == null 
 			|| options.zipcode.length <= 0)? false : true){
 		// Do stuff if user provides a zipcode.
+	} 
+	// Only if zipcode was invalid then get the user location, 
+	else {
+		if((options.userLat === undefined || options.userLat == null || options.userLat.length <= 0
+				|| options.userLng === undefined || options.userLng == null 
+				|| options.userLng.length <= 0)? false : true){
+			if(isNaN(Number(options.userLat)) && isNaN(Number(options.userLng)) ? false : true){
+				// Do stuff if user current location's lat and long are there in the request
+			}
+		}	
 	}
-	if((options.userLat === undefined || options.userLat == null || options.userLat.length <= 0
-			|| options.userLng === undefined || options.userLng == null 
-			|| options.userLng.length <= 0)? false : true){
-		if(isNaN(Number(options.userLat)) && isNaN(Number(options.userLng)) ? false : true){
-			// Do stuff if user current location's lat and long are there in the request
-		}
-	}
+	// If user HTML5 location fails, location will not be used to search providers.
+	// What are the options to sort by closest?
 	
 	var queryOptions = {sort: {updatedAt: -1}, limit: 100};
 
@@ -33,8 +38,9 @@ SearchSource.defineSource('serviceproviders', function(chosenSpeciality, options
 		var foundProviders = ServiceProviders.find(selector, queryOptions).fetch();
 
 		for(var i=0; i<foundProviders.length; i++){
-			console.log("foundProviders location provider"+i+"  " +foundProviders[i].location );
-			if((foundProviders[i].location === undefined || foundProviders[i].location == null || foundProviders[i].location.length <= 0)? false : true){
+			if((foundProviders[i].location === undefined || 
+					foundProviders[i].location == null || 
+					foundProviders[i].location.length <= 0)? false : true){
 				var lat = (foundProviders[i].location.split(','))[0];
 				var lng = (foundProviders[i].location.split(','))[1];
 				console.log("foundProviders location provider"+i+" lat " +lat+" lng " +lng);
