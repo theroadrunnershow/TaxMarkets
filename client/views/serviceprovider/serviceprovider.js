@@ -1,17 +1,26 @@
-Template.createprovider.events = {
-	'submit .add' : function(e) {
-		event.preventDefault();
-		if (AutoForm.validateForm('add')) {
-			Router.go('/createdprovider');
-		}
-		AutoForm.resetForm('add');
-	},
-	'submit .editf' : function(e) {
-		event.preventDefault();
-		Router.go('/createdprovider');
-		AutoForm.resetForm('editf');
-	}
-};
+
+AutoForm.hooks({
+	add: {
+	    onSubmit: function (doc) {
+	    	AutoForm.resetForm('add');
+	    	this.done();
+	    	return false;
+	    },
+	    onSuccess: function(doc, result) {
+	    	Router.go('/createdprovider');
+	    }
+	  },
+	  editf: {
+		    onSubmit: function (doc) {
+		    	AutoForm.resetForm('editf');
+		    	this.done();
+		    	return false;
+		    },
+		    onSuccess: function(doc, result) {
+		    	Router.go('/createdprovider');
+		    }
+		  }	  
+	});
 
 Template.providerDetailsCreated.events = {
 	'click #editbtn' : function(event) {
