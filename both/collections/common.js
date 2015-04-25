@@ -45,7 +45,6 @@ Schemas.search = new SimpleSchema({
 	},
 	speciality : {
 		type : String,
-		optional : true,
 		autoform : {
 			type : "select",
 			options : function() {
@@ -121,7 +120,7 @@ Schemas.search = new SimpleSchema({
 	},
 	radius : {
 		type : String,
-		label : 'Within',
+		label : 'Search within',
 		optional : true,
 		autoform : {
 			type : "select",
@@ -133,10 +132,10 @@ Schemas.search = new SimpleSchema({
 					label : "<10 Miles",
 					value : 10
 				}, {
-					label : "<20",
+					label : "<20 Miles",
 					value : 20
 				}, {
-					label : "<30",
+					label : "<30 Miles",
 					value : 30
 				}];
 			}

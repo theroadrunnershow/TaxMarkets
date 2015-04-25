@@ -14,7 +14,8 @@ Router.map(function() {
 	this.route('serviceprovider', {
 		path: "/serviceprovider",	
 	    data: {
-	    		selectedProvider: function () {return ServiceProviders.findOne({ owner: Meteor.userId() });}
+	    		selectedProvider: function () {
+	    			return ServiceProviders.findOne({ owner: Meteor.userId() });}
 		    },
 	    waitOn: function() {
 	        return Meteor.subscribe('serviceproviders');
@@ -42,15 +43,7 @@ Router.map(function() {
 		    	Router.go("/serviceprovider");
 		    }
 		    this.next();
-		  },
-	    // articles now under `serviceProviderList` instead of `this`
-	    data: {
-	      serviceProviderList: function () {return ServiceProviders.find().fetch()},
-	      selectedProvider: {}
-	    },
-	    waitOn: function() {
-	        return Meteor.subscribe('serviceproviders');
-	      }
+		  }
 	});
 }
 );

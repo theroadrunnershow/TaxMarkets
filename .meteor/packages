@@ -47,3 +47,5 @@ matb33:collection-hooks
 email
 mdg:geolocation
 meteorhacks:search-source
+meteorhacks:aggregate
+alethes:pages
