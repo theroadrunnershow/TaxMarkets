@@ -28,12 +28,12 @@ Meteor.methods({
 });
 
 ServiceProviders.before.insert(function (userId, doc) {
+	var coords=[];
+	coords.push(Number((doc.officelocation.split(","))[1]));
+	coords.push(Number((doc.officelocation.split(","))[0]));
 	doc.location = {
 			type:"Point",
-			coordinates: {
-				lng:Number((doc.officelocation.split(","))[1]),
-				lat:Number((doc.officelocation.split(","))[0])
-			}};
+			coordinates: coords};
 });
 
 ServiceProviders.after.insert(function (userId, doc) {

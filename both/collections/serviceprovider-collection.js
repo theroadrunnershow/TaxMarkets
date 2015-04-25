@@ -22,7 +22,8 @@ LocationSchema = new SimpleSchema({
 	    }
 	  },
 	  coordinates: {
-	    type: GeocoordsSchema 
+	    type: [Number],
+	    index: '2dsphere'
 	  }
 	});
 

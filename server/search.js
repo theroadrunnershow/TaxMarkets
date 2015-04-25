@@ -1,4 +1,6 @@
 SearchSource.defineSource('serviceproviders', function(chosenSpeciality, options) {
+	
+	ServiceProviders._ensureIndex({ "location": "2dsphere", "specialities":1});
 
 	console.log("SearchSource.defineSource options.radius " + options.radius);
 	console.log("SearchSource.defineSource options.zipcode " + options.zipcode);
