@@ -1,3 +1,4 @@
+
 #submitSearch {
     cursor:pointer; 
     width:70px; 
@@ -39,12 +40,27 @@
   height: 15px;
 }
 
-.package {
-  width: 600px;
+.providerSearchResultDetail {
+  font-size: 13px;
+  width: 60%;
   border-bottom: 1px solid #eee;
   padding: 8px 0;
 }
 
-.package .name {
+.providerSearchResultDetail .providerSearchResultDetailHeader {
   font-weight: 400;
+  position: top;
+  margin-top: 0px;
+  margin-left: 0px;
+  vertical-align: top;
 }
+
+.container-1{
+  vertical-align: middle;
+  white-space: nowrap;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
