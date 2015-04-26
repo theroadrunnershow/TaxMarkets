@@ -1,18 +1,3 @@
-<template name="searchBox">
-  {{#autoForm class="form-inline" schema=searchSchema id="searchForm" 
-  type="method" meteormethod="searchQuery" afFieldInput-placeholder="schemaLabel"}}
-	{{> afQuickField name="speciality" placeholder="schemaLabel" id="specialityDropdown"}}
-	<div class="form-group">
-		<input id="zipcode" type="number" name="zipcode" placeholder="Zipcode" data-schema-key="zipcode" class="form-control">    
-		<span class="help-block"></span>
-	</div>
-	{{> afQuickField name="radius" id="radius"}}
-    <div class="form-group"  style="vertical-align: 20%;">
-      <input id="submitSearch" name="submit" type="submit" value="Search" />
-    </div>  
-  {{/autoForm}}
-</template>
-
 <template name="searchResult">
   <div id='search-result'>
     <div id="search-meta">
@@ -39,6 +24,18 @@
     {{/each}}
   </div>
 </template>
+<template name="searchMetaDataHead">
+	<h3 class="panel-title">
+		{{#if isLoading}}
+			Finding professionals near you..
+		{{else}}
+			Found {{getProviderCount}} tax and financial professionals
+			{{#if getQueryDetails}}
+			who specialize in {{getQueryDetails}}
+			{{/if}}
+		{{/if}}
+	</h3>
+</template>
 
 <template name="serviceproviders">
 
@@ -55,9 +52,10 @@
 			{{> searchBox }}
 	</div>
 </div>
-<div class="panel panel-default">
+<div class="panel panel-primary">
+	
 	<div class="panel-heading">
-		<h3 class="panel-title">Found XX professionals</h3>
+	{{> searchMetaDataHead}}
 	</div>
 	<div class="panel-body">
 		{{> searchResult }}

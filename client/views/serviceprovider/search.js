@@ -18,20 +18,35 @@ Template.searchResult.helpers({
 	}
 });
 
+Template.searchMetaDataHead.helpers({
+	getProviderCount: function() {
+		return ServiceProviderSearch.getMetadata().returnedProviderCount;
+	},
+	isLoading: function() {
+		return ServiceProviderSearch.getStatus().loading;
+	},
+	getQueryDetails: function() {
+		if(ServiceProviderSearch.getCurrentQuery()!==null 
+				&& ServiceProviderSearch.getCurrentQuery()!==undefined){
+			return ServiceProviderSearch.getCurrentQuery();
+		} else {
+			return null;
+		}
+	}
+});
+
 Template.searchResult.rendered = function() {
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(function(position) {
 			options.userLat = position.coords.latitude;
 			options.userLng = position.coords.longitude;
-			console.log(position.coords.latitude+ " "+position.coords.longitude);
+			
 			ServiceProviderSearch.search('',options);
 		},
 		function(error) {
 			// Handle non-supported clients?
 		});
-		}
-	//console.log("loading.. options.userLat="+options.userLat);
-	
+		}	
 };
 
 Template.searchBox.events({

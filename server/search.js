@@ -59,10 +59,15 @@ SearchSource.defineSource('serviceproviders', function(chosenSpeciality, options
 				console.log("foundProviders empty location" );
 			}
 		}
-		
-		return foundProviders;
+		var metadata={
+				returnedProviderCount:foundProviders.length
+		};
+		return {
+			data: foundProviders,
+			metadata: metadata
+		};
 	} else {
-		return ServiceProviders.aggregate(
+		var foundProviders = ServiceProviders.aggregate(
 				[{ $geoNear: { 
 					near: {type: 'Point', coordinates: [Number(options.userLng),Number(options.userLat) ]}, 
 					distanceMultiplier:0.001, 
@@ -72,5 +77,12 @@ SearchSource.defineSource('serviceproviders', function(chosenSpeciality, options
 					} 
 				}
 				]);
+		var metadata={
+				returnedProviderCount:foundProviders.length
+		};
+		return {
+			data: foundProviders,
+			metadata: metadata
+		};;
 	}
 });

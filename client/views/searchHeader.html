@@ -1,0 +1,65 @@
+<template name="searchBox">
+<div class="container-1">
+ {{#autoForm class="form-inline"
+schema=searchSchema id="searchForm" type="method"
+meteormethod="searchQuery" afFieldInput-placeholder="schemaLabel"}}
+
+<div class="form-group" >
+<label style="font-weight: normal;">Search for </label>
+<select name="speciality" placeholder="Speciality"
+	id="specialityDropdown" required="" data-schema-key="speciality"
+	autocomplete="off" class="form-control">
+	<option value="Tax – Appeals and Representation">Tax – Appeals
+		and Representation</option>
+	<option value="Tax – Business">Tax – Business</option>
+	<option value="Tax – Comprehensive">Tax – Comprehensive</option>
+	<option value="Tax – Consolidated Returns">Tax – Consolidated
+		Returns</option>
+	<option value="Tax – Consulting">Tax – Consulting</option>
+	<option value="Tax – Corporate">Tax – Corporate</option>
+	<option value="Tax – Divorce">Tax – Divorce</option>
+	<option value="Tax – High Net Worth Individuals">Tax – High Net Worth Individuals</option>
+	<option value="Tax – Individuals">Tax – Individuals</option>
+	<option value="Tax – International">Tax – International</option>
+	<option value="Tax – Late/Back Year Taxes">Tax – Late/Back
+		Year Taxes</option>
+	<option value="Tax – LLC/LLP">Tax – LLC/LLP</option>
+	<option value="Tax – Multi-State Returns">Tax – Multi-State
+		Returns</option>
+	<option value="Tax – Non-Resident/Foreign Returns">Tax –
+		Non-Resident/Foreign Returns</option>
+	<option value="Tax – Offers in Compromise">Tax – Offers in
+		Compromise</option>
+	<option value="Tax – Post Mortem Planning">Tax – Post Mortem
+		Planning</option>
+	<option value="Tax – Real/Personal Property Taxes">Tax –
+		Real/Personal Property Taxes</option>
+	<option value="Tax – Reorganizations">Tax – Reorganizations</option>
+	<option value="Tax – Sales Taxes">Tax – Sales Taxes</option>
+	<option value="Tax – Stock Options">Tax – Stock Options</option>
+	<option value="Tax – Value Added Tax (VAT)">Tax – Value Added
+		Tax (VAT)</option>
+	<option value="Tax – Bankruptcy">Tax – Bankruptcy</option>
+</select> 
+</div>
+
+<div class="form-group">
+<label style="font-weight: normal;">in </label>
+		<input id="zipcode" name="zipcode" placeholder="Zipcode" data-schema-key="zipcode" class="form-control">    
+	</div>
+<div class="form-group">
+<label style="font-weight: normal;">within </label>
+<select name="radius" placeholder="Within"
+	id="radius" required="" data-schema-key="radius"
+	autocomplete="off" class="form-control">
+	<option value="10">&lt;20 Miles</option>
+	<option value="20">&lt;30 Miles</option>
+	<option value="30">&lt;40 Miles</option>
+</select>
+</div>
+    <div class="form-group"  style="vertical-align: 20%;">
+      <input id="submitSearch" name="submit" type="submit" value="Search" />
+    </div>  
+  {{/autoForm}}
+ </div>
+</template>
