@@ -60,7 +60,8 @@ SearchSource.defineSource('serviceproviders', function(chosenSpeciality, options
 			}
 		}
 		var metadata={
-				returnedProviderCount:foundProviders.length
+				returnedProviderCount:foundProviders.length,
+				searchCenterCoords:[Number(options.userLng),Number(options.userLat) ]
 		};
 		return {
 			data: foundProviders,
@@ -78,7 +79,8 @@ SearchSource.defineSource('serviceproviders', function(chosenSpeciality, options
 				}
 				]);
 		var metadata={
-				returnedProviderCount:foundProviders.length
+				returnedProviderCount:foundProviders.length,
+				searchCenterCoords:[Number(options.userLng),Number(options.userLat) ]
 		};
 		return {
 			data: foundProviders,

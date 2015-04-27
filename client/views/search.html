@@ -5,40 +5,58 @@
         searching ...
       {{/if}}
     </div>
-
-    {{#each getServiceProviders}}
-    <div class="providerSearchResult">
-    <div class="providerSearchResult row">
-    	<div class="col-md-1">
-    	<div class="provider-photo-container">
-        	<img src="" alt="" style="display: inline;">
-    	</div>
-    	</div>
-    	<div class="col-md-9">
-	    	<div class="providerSearchResultDetail">
-		    <div class="providerSearchResultDetailHeader">
-		      <h3>
-		        <span>{{{businessname}}}</span>
-		        <small>{{{contactname}}}</small>
-		      </h3>
-		      <h4 class="description">
-		        <span>{{{officeaddress}}}</span>
-		      </h4>
+    <div class="col-md-9"> <!-- column 9 -->
+	    {{#each getServiceProviders}}
+	    <div class="providerSearchResult row">
+	    	<div class="col-md-1">
+	    	<div class="provider-photo-container">
+	        	<img src="" alt="" style="display: inline;">
+	    	</div>
+	    	</div>
+	    	<div class="col-md-9">
+		    	<div class="providerSearchResultDetail">
+			    <div class="providerSearchResultDetailHeader">
+			      <h3>
+			        <span>{{{businessname}}}</span>
+			        <small>{{{contactname}}}</small>
+			      </h3>
+			      <h4 class="description">
+			        <span>{{{officeaddress}}}</span>
+			      </h4>
+			    </div>
+			    
+			    <div class="providerRating">
+			    
+			    </div>
+			    <div class="specialityText">
+			    <h5>{{{specialities}}}</h5></div>
+			    <div class="description">
+			    <h5>{{{businessdesc}}}</h5></div>
+			    </div>
 		    </div>
-		    <div class="providerRating">
-		    
+		    <div class="col-md-2">
+		    	<div class="distanceOfProviderFromCurrentLoc">
+			    <h5>{{mathRounderHelper distance}} km away</h5>
+			    </div>
+			    <div class="maps-link">
+			    <h5><a href="{{mapDirectionsLink}}" target="_blank">Go here</a></h5></div>	
 		    </div>
-		    <div class="specialityText">
-		    <h5>{{{specialities}}}</h5></div>
-		    <div class="description">
-		    <h5>{{{businessdesc}}}</h5></div>	    
-		    </div>
-	    </div>
-	</div>
-	</div>
-    {{/each}}
+		</div>
+	    {{/each}}
+  </div><!-- column 9 -->
+  <div class="col-md-3"> <!-- column 3 -->
+	  <div class="provider-map-container" id="map-canvas">
+	  {{#if getProviderCount}}
+	  	{{> googleMap name="providerMap" options=providerMapOptions}}
+	  {{else}}
+	    
+	  {{/if}}
+	  </div>  	
+  </div><!-- column 3 -->
   </div>
 </template>
+
+
 <template name="searchMetaDataHead">
 	<h3 class="panel-title">
 		{{#if getProviderCount}}
