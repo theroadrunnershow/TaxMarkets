@@ -1,28 +1,18 @@
 ServiceProviders = new Mongo.Collection('serviceproviders');
 
-GeocoordsSchema = new SimpleSchema({
-	  lng: {
-	    type : Number,
-	    decimal: true,
-	    min: -180,
-	    max: 180
-	  }, 
-	  lat: {
-	    type : Number,
-	    decimal: true,
-	    min: -90,
-	    max: 90
-	  }
-	});
 LocationSchema = new SimpleSchema({
 	  type : {
 	    type : String,
-	    autoValue: function() {
-	      return "Point";
-	    }
+	    defaultValue: "Point"
 	  },
 	  coordinates: {
-	    type: [Number]
+	    type: [Number],
+	    decimal: true,
+	    autoValue: function(){
+	    	var locStrArray = this.field('officelocation').value.split(",");
+	    	console.log("locStrArray "+locStrArray);
+	    	return [Number(locStrArray[1]), Number(locStrArray[0])];
+	    }
 	  }
 	});
 
@@ -44,24 +34,25 @@ Schemas.ServiceProviders = new SimpleSchema({
   officelocation: {
     type: String,
     label: 'Location of Office',
-    autoform: {
-      type: 'map',
-      afFieldInput: {
-        type: 'map',
-        geolocation: true,
-        searchBox: true,
-        autolocate: true
-      }
-    }
+    defaultValue: "0,0"
+  },
+  googlePlaceDetail: {
+	    type: Object,
+	    label: 'Google Place',
+	    optional: true
+	  },
+  certifiedBool: {
+	  type: String,
+	  label: 'Certified and Searchable?',
+	  defaultValue: "0"
   },
   location: {
-    type: [LocationSchema],
-    optional:true
+    type: LocationSchema,
+    optional: true
   },
   officeaddress: {
     type: String,
-    label: 'Address as shown in your profile',
-    optional: true
+    label: 'Address as shown in your profile'
   },
   createdAt: {
     type: Date,

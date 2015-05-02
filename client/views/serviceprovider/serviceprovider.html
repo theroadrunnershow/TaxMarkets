@@ -42,12 +42,24 @@
 			{{> afQuickField name="businessname"}} 
 			{{> afQuickField name="contactname"}} 
 			{{> afQuickField name="phone"}} 
-			{{> afQuickField name="officelocation"}}
-			{{> afQuickField name="officeaddress"}}
+		  	<div style="display: none;">
+		  	{{> afQuickField name="officelocation"}} 
+		  	</div>
+			<div>
+	  			<div class="provider-map-container" id="map-canvas">
+	  			{{> googleMap name="gmap" options=mapOptions}}
+	  			</div>
+	  		</div>
+		  	<div style="display: none;">
+		  	{{> afQuickField name="officeaddress"}} 
+		  	</div>
+		  	<div style="display: none;">
+		  	{{> afQuickField name="location" step="0.00000000001"}} 
+		  	</div>
 			{{> afQuickField name="tin"}} 
 			{{> afFormGroup name="specialities"}} 
 			{{> afQuickField name="businessdesc"}}
-			<button type="submit" class="btn btn-primary">Update your profile</button>
+			<button type="submit" id="submit" class="btn btn-primary">Update your profile</button>
 			{{/autoForm}}
 		</div>
 		
@@ -60,11 +72,24 @@
 			{{> afQuickField name="businessname"}} 
 			{{> afQuickField name="contactname"}} 
 			{{> afQuickField name="phone"}} 
-			{{> afQuickField name="officelocation"}}
+		  	<div style="display: none;">
+		  	{{> afQuickField name="officelocation"}} 
+		  	</div>
+			<div>
+	  			<div class="provider-map-container" id="map-canvas">
+	  			{{> googleMap name="gmap" options=mapOptions}}
+	  			</div>
+	  		</div>
+		  	<div style="display: none;">
+		  	{{> afQuickField name="officeaddress"}} 
+		  	</div>
+		  	<div style="display: none;">
+		  	{{> afQuickField name="location" step="0.00000000001"}} 
+		  	</div>
 			{{> afQuickField name="tin"}} 
 			{{> afFormGroup name="specialities"}} 
 			{{> afQuickField name="businessdesc"}}
-			<button type="submit" class="btn btn-primary">Create Profile!</button>
+			<button type="submit" id="submit" class="btn btn-primary">Create Profile!</button>
 			{{/autoForm}}
         </div>
         {{/if}}

@@ -1,7 +1,5 @@
-if (Meteor.isClient) {
-	Meteor.startup(function() {
+Meteor.startup(function() {
 		if (GoogleMaps.loaded()?false:true) {
 			GoogleMaps.load();
 		}
-	});
-}
+});

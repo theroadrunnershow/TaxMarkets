@@ -6,11 +6,10 @@ Meteor.methods({
 					+ doc.officelocation+"&key=AIzaSyD_a9DwOndfi4_5pyOAKcn0xIT-FqCHT_I", function(error, result) {
 				if(error){
 					console.log('Reverse Geocoding Failed because: '+error.reason);
-				}
-			  	
+				} 	
 			  	var officeLocationFormattedAddress = result.data.results[0].formatted_address;
-				ServiceProviders.update({_id: doc._id}, {$set: {officeaddress:officeLocationFormattedAddress }});
-				console.log("Updated address =" + officeLocationFormattedAddress);
+			  	//Update city, state, zip and country to enable easier searches
+				ServiceProviders.direct.update({_id: doc._id}, {$set: {officeaddress:officeLocationFormattedAddress }});
 			});	
 		}
 		if((doc.officelocation === undefined || doc.officelocation == null || doc.officelocation.length <= 0) ? true : false){
@@ -36,11 +35,8 @@ ServiceProviders.before.insert(function (userId, doc) {
 			coordinates: coords};
 });
 
+/* Pass everything in the UI since the maps/places API provides everything in the client.
 ServiceProviders.after.insert(function (userId, doc) {
 	Meteor.call('UpdateAddressAndLocation', userId, doc);
 });
-
-// Check if can remove.
-ServiceProviders.before.update(function (userId, doc) {
-	Meteor.call('UpdateAddressAndLocation', userId, doc);
-});
+*/

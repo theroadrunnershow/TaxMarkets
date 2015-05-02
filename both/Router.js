@@ -89,11 +89,3 @@ signInProhibited = function() {
 Router.onBeforeAction(signInProhibited, {
   only: ['entrySignUp', 'entrySignUp', 'entryForgotPassword']
 });
-
-Router.onBeforeAction(function() {
-	if (GoogleMaps.loaded()?false:true) {
-		GoogleMaps.load();
-		}
-	  this.next();
-	}, { only: ['serviceproviders'] });
-

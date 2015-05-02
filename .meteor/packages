@@ -30,8 +30,6 @@ yogiben:notifications@0.0.6
 yogiben:pretty-emails
 yogiben:pretty-email
 yogiben:autoform-file
-yogiben:admin
-yogiben:autoform-map
 multiply:iron-router-progress
 manuelschoebel:ms-seo
 spiderable
@@ -48,5 +46,8 @@ email
 mdg:geolocation
 meteorhacks:search-source
 meteorhacks:aggregate
-alethes:pages
+manuelschoebel:wait-on-lib
+external-file-loader
 dburles:google-maps
+mrt:googlemaps
+yogiben:autoform-map

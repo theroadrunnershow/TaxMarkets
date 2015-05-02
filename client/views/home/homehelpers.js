@@ -1,4 +1,3 @@
-// myapp.js
 
 Template.home.events({
   'click #serviceproviderBtnClicked': function (event) {
@@ -12,6 +11,12 @@ Template.home.events({
 		}
 	}
 });
+
+Template.contactForm.events({
+	  'click #submit-btn': function (event) {
+		  Router.go("/home");
+	  }
+	});
 
 Template.contactForm.helpers({
 	  contactFormSchema: function() {

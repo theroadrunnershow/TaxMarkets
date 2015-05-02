@@ -20,7 +20,7 @@
 		twitter:
 			url: 'http://twitter.com/asunku'
 			icon: 'twitter'
-		info:
-			url: 'http://meteorfactory.io'
+		contactus:
+			url: '/contactForm'
 			icon: 'link'
 	publicRoutes: ['home']

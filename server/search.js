@@ -10,8 +10,8 @@ SearchSource.defineSource('serviceproviders', function(chosenSpeciality, options
 		options.radius = 50; //miles
 	}
 	
-	if((options.zipcode === undefined || options.zipcode == null 
-			|| options.zipcode.length <= 0)? true : false){
+	if(options.zipcode !== undefined && options.zipcode !== null 
+			&& options.zipcode.length >0){
 		// get the lat long from zip code is user has provided
 		HTTP.call("get","https://maps.googleapis.com/maps/api/geocode/json?address="+options.zipcode +"&key=AIzaSyD_a9DwOndfi4_5pyOAKcn0xIT-FqCHT_I", 
 				function(error, result) {
@@ -35,7 +35,7 @@ SearchSource.defineSource('serviceproviders', function(chosenSpeciality, options
 	if(chosenSpeciality) {
 		var chosenSpecialityArray = [];
 		chosenSpecialityArray.push(chosenSpeciality);
-		var selector = { "specialities": { $in: chosenSpecialityArray } };
+		var selector = { "specialities": { $in: chosenSpecialityArray }, "certifiedBool": "0"};
 		//var foundProviders = ServiceProviders.find(selector, queryOptions).fetch();
 		
 		var foundProviders = ServiceProviders.aggregate(
