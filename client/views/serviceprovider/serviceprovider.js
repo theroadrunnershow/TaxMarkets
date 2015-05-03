@@ -51,14 +51,6 @@ Template.createprovider.helpers({
 
 Template.createprovider.onCreated(function() {
 	GoogleMaps.ready('gmap', function(map) {
-		var updateDoc;
-		try{
-			updateDoc = AutoForm.getFormValues("editf").updateDoc;
-			// create marker, set address in search box.
-		}
-		catch(err) {
-		    //do nothing, we want this only for update doc.
-		}
 		
 		var marker = new google.maps.Marker({
 			position : map.options.center,
@@ -74,6 +66,21 @@ Template.createprovider.onCreated(function() {
 		input.setAttribute("placeholder", "Search Box");
 		map.instance.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 		var searchBox = new google.maps.places.SearchBox(input);
+		var updateDoc;
+		try{
+			updateDoc=AutoForm.getFormValues("editf").updateDoc;
+			var latlong = AutoForm.getFieldValue("editf","officelocation").split(",");
+			marker.setOptions({
+				position : new google.maps.LatLng(Number(latlong[0]), 
+						Number(latlong[1]) ),
+				map : map.instance,
+			});
+			map.instance.setCenter(marker.getPosition());
+			input.setAttribute("value", AutoForm.getFieldValue("editf","officeaddress"));
+		}
+		catch(err) {
+		    //do nothing, we want this only for update doc.
+		}
 
 		// Bias SearchBox results towards places within the bounds of the current map's viewport.
 		google.maps.event.addListener(map, 'bounds_changed', function() {
@@ -97,6 +104,43 @@ Template.createprovider.onCreated(function() {
 					document.getElementsByName('officeaddress').length>0){
 				var y = document.getElementsByName('officeaddress')
 				y[0].value = places[0].formatted_address;
+			}
+			var addressComponents = places[0].address_components;
+			var componentTypes;
+			for(var q=0; q<addressComponents.length; q++){
+				componentTypes = addressComponents[q].types;
+				for(var m=0; m<componentTypes.length; m++){
+					if(componentTypes[m]==='country'){
+						if(document.getElementsByName('country') &&
+								document.getElementsByName('country').length>0){
+							var x = document.getElementsByName('country')
+							x[0].value = addressComponents[q].long_name;
+						}
+					}
+					if(componentTypes[m]==='administrative_area_level_1'){
+						console.log("state");
+						console.log(addressComponents[q].long_name);
+						if(document.getElementsByName('state') &&
+								document.getElementsByName('state').length>0){
+							var x = document.getElementsByName('state')
+							x[0].value = addressComponents[q].long_name;
+						}
+					}
+					if(componentTypes[m]==='locality'){
+						if(document.getElementsByName('city') &&
+								document.getElementsByName('city').length>0){
+							var x = document.getElementsByName('city')
+							x[0].value = addressComponents[q].long_name;
+						}
+					}
+					if(componentTypes[m]==='postal_code'){
+						if(document.getElementsByName('zip') &&
+								document.getElementsByName('zip').length>0){
+							var x = document.getElementsByName('zip')
+							x[0].value = addressComponents[q].long_name;
+						}
+					}
+				}
 			}
 			map.instance.setCenter(places[0].geometry.location);
 			marker.setOptions({
