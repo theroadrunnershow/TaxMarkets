@@ -27,9 +27,7 @@
                     <div class="col-lg-12 col-sm-12">
                         <h1>{{Config.title}}</h1>
                         <h2 style="color:white;" class="hidden-xs">{{Config.subtitle}}</h2>
-                        <a href="{{pathFor 'serviceproviders'}}" class="btn btn-success">
-                        <!-- <i class="fa fa-dashboard"></i> -->
-                        Search for Tax Help! </a>                        
+                        <a href="{{pathFor 'serviceproviders'}}" class="btn btn-success">Search for Tax Help! </a>                        
                         {{#if currentUser}}
                         <a id="serviceproviderBtnClicked" class="btn btn-success" href="{{pathFor 'serviceprovider'}}">Are you a certified Service Provider?</a> 
                         {{else}}
