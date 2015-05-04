@@ -36,11 +36,22 @@ Schemas.ServiceProviders = new SimpleSchema({
     label: 'Location of Office',
     defaultValue: "0,0"
   },
-  googlePlaceDetail: {
-	    type: Object,
-	    label: 'Google Place',
-	    optional: true
-	  },
+  city: {
+	  type: String,
+	  optional: true
+  },
+  state: {
+	  type: String,
+	  optional: true
+  },
+  country: {
+	  type: String,
+	  optional: true
+  },
+  zip: {
+	  type: String,
+	  optional: true
+  },
   certifiedBool: {
 	  type: String,
 	  label: 'Certified and Searchable?',

@@ -8,7 +8,7 @@
 				<a href="{{pathFor 'profile'}}" class="xs-mobile-cta navbar-toggle">
 					<i class="fa fa-user"></i>
 				</a>
-				<a class="navbar-brand" href="{{#if User}}{{Config.dashboardRoute}}{{else}}{{Config.homeRoute}}{{/if}}">{{{Config.logo}}}</a>
+				<a class="navbar-brand" href="{{Config.homeRoute}}">{{{Config.logo}}}</a>
 			</div>
 			<div class="navbar-collapse collapse">
 				{{#if currentUser}}

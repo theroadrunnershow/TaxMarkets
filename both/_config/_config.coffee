@@ -12,7 +12,7 @@
 	about: 'http://meteorfactory.io'
 	username: false
 	homeRoute: '/'
-	dashboardRoute: '/'
+	dashboardRoute: '/serviceproviders'
 	socialMedia:
 		facebook:
 			url: 'https://www.facebook.com/abhishek.sunku'

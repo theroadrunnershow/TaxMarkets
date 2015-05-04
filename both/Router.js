@@ -18,7 +18,7 @@ Router.map(function() {
 	    			return ServiceProviders.findOne({ owner: Meteor.userId() });}
 		    },
 	    waitOn: function() {
-	        return Meteor.subscribe('serviceproviders');
+	        return Meteor.subscribe('serviceproviders', Meteor.userId() );
 	      }
 	});	
 	this.route('profile',{
@@ -34,8 +34,8 @@ Router.map(function() {
 	this.route('createdprovider', {
 		data: function() { return ServiceProviders.findOne({ owner: Meteor.userId() }); },
 	    waitOn: function() {
-	        return Meteor.subscribe('serviceproviders');
-	      }
+	        return Meteor.subscribe('serviceproviders', Meteor.userId() );
+		      }
 	});
 	this.route('serviceproviders', {
 		onBeforeAction: function () {
