@@ -1,4 +1,5 @@
 <template name="home">
+<link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
 <div id="skrollr-body">
     {{> skrollrBackground}}
     <section id="intro" class="colored text-center">
@@ -26,34 +27,68 @@
                 <div class="row">
                     <div class="col-lg-12 col-sm-12">
                         <h1>{{Config.title}}</h1>
-                        <h2 style="color:white;" class="hidden-xs">{{Config.subtitle}}</h2>
-                        <a href="{{pathFor 'serviceproviders'}}" class="btn btn-success">Search for Tax Help! </a>                        
-                        {{#if currentUser}}
-                        <a id="serviceproviderBtnClicked" class="btn btn-success" href="{{pathFor 'serviceprovider'}}">Are you a certified Service Provider?</a> 
-                        {{else}}
-                        <a id="serviceproviderBtnClicked" class="btn btn-success" href="{{pathFor 'entrySignUp'}}">Are you a certified Service Provider?</a> 
-                        {{/if}}                 
+                        <h2 style="color:white;" class="hidden-xs">{{Config.subtitle}}</h2>            
                     </div>
-                    <div class="col-lg-12 col-sm-12">
-                    	
-                    </div>
-          
-                    <!--                 <div class="col-lg-6 col-sm-6">
-                                                <img class="img-responsive" src="/img/image-header1.png" alt="">
-                    </div> -->
                 </div>
+
+                <div class="row">
+					<div class="col-lg-12 col-sm-12">
+						<div class="box box-primary box-special-p">
+							<div class="box-header">
+								<h3 class="box-title">Search Now!</h3>
+							</div>
+							<!-- /.box-header -->
+							<!-- form start -->
+							<form role="form">
+								<div class="box-body">
+									<div class="form-group box-content-special">
+										<input type="number" class="form-control" 
+										id="in-postalcode"
+											placeholder="Enter postal code">
+									</div>
+									<div class="form-group box-content-special">
+										<select class="form-control">
+											<option>Choose the tax professional's speciality</option>
+											<option>option 2</option>
+											<option>option 3</option>
+											<option>option 4</option>
+											<option>option 5</option>
+										</select>
+									</div>
+									<div class="form-group box-content-special">
+										<button id="homepage-mainsearch-btn" type="submit" class="btn btn-primary">Search</button>
+									</div>
+								</div>
+								<!-- /.box-body -->
+
+							</form>
+						</div>
+					</div>
+				</div>
             </div>
         </div>
     </section>
-	<section id="homepage-search" class="text-center">
-		<div class="container wow fadeIn animated">
-			<div class="row col-md-12">
-				<h3>Search Now!</h3>
-				<h4>Add search form here</h4>
+    <section id="home-buttons" class="text-center">
+    	<div class="container wow animated bounceIn">
+		<div class="row">
+			<div class="col-lg-6 col-sm-6">
+				<a href="{{pathFor 'serviceproviders'}}"
+					class="homepage-button btn-success"> <span>Search for Tax Help! </span>
+				</a>
+			</div>
+			<div class="col-lg-6 col-sm-6">
+				{{#if currentUser}} 
+				<a id="serviceproviderBtnClicked"
+					class="homepage-button btn-success"
+					href="{{pathFor 'serviceprovider'}}"> <span>Are you a certified Service Provider? </span>
+				</a> 
+				{{else}} 
+				<a id="serviceproviderBtnClicked"
+					class="homepage-button btn-success"
+					href="{{pathFor 'entrySignUp'}}"> <span>Are you a certified Service Provider? </span>
+				</a> {{/if}}
 			</div>
 		</div>
-		<div class="container">
-			
 		</div>
 	</section>
 	<section id="how-it-works" class="text-center">
@@ -153,4 +188,8 @@
     </div>
   </fieldset>
   {{/autoForm}}
+</template>
+
+<template name="home-search-box">
+
 </template>
