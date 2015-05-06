@@ -1,16 +1,22 @@
-
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: 'Montserrat', sans-serif;
+}
+.form-control {
+    border-radius: 5.55555582046509px;
+}
 #submitSearch {
     cursor:pointer; 
-    width:70px; 
-    height: 31px; 
+    border-radius: 5.55555582046509px;
+    width:140px; 
+    height: 39px; 
     line-height:0; 
     font-size:0; 
     text-indent:-999px;
     color: transparent;  
-    background: url(/img/find.png) no-repeat #4d90fe center; 
-    border: 1px solid #3079ED; 
-    -moz-border-radius: 2px; 
-    -webkit-border-radius: 2px; 
+    background: url(/img/find.png) no-repeat rgb(221, 221, 221) center; 
+    border: 1px solid rgb(221, 221, 221); 
+    -moz-border-radius: 5.55555582046509px; 
+    -webkit-border-radius: 5.55555582046509px; 
 }
 /* Style the search button hover state */
 #submitSearch:hover {
@@ -41,12 +47,14 @@
 }
 
 .providerSearchResult {
-  border-bottom: 1px solid #eee;
-  padding: 8px 0;
+	font-family: 'Montserrat';
+	border-bottom: 1px solid #eee;
+	padding: 8px 0;
 }
 
 .providerSearchResultDetail {
-  font-size: 13px;
+	font-family: 'Montserrat';
+  	font-size: 13px;
 }
 
 .providerSearchResultDetail .providerSearchResultDetailHeader {

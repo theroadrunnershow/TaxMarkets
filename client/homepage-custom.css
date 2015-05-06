@@ -51,9 +51,6 @@ body {
 	-webkit-border-radius: 8px;
     -moz-border-radius: 8px;
     border-radius: 8px;
-    border:1px;
-    border-style: solid;
-    border-color: rgb(221, 221, 221);
 }
 .box-content-special {
 	width:80%;

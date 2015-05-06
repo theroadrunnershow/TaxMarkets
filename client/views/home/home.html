@@ -7,7 +7,8 @@
             <nav class="navbar navbar-default" role="navigation">
                 <div class="container">
                     <div class="container">
-                        <a class="navbar-brand" href="{{pathFor 'home'}}">{{Config.name}}</a>
+                        <a class="navbar-brand" href="{{pathFor 'home'}}">About {{Config.name}}</a>
+                        <a class="navbar-brand" href="{{pathFor 'home'}}">Are you a CPA/CFA?</a>
                         <div id="main-nav" class="navbar-collapse">
                             <ul class="social-links">
                                 {{#unless currentUser}}
@@ -27,47 +28,15 @@
                 <div class="row">
                     <div class="col-lg-12 col-sm-12">
                         <h1>{{Config.title}}</h1>
-                        <h2 style="color:white;" class="hidden-xs">{{Config.subtitle}}</h2>            
+                        <h4 class="hidden-xs">{{Config.subtitle}}</h4>            
                     </div>
                 </div>
 
-                <div class="row">
-					<div class="col-lg-12 col-sm-12">
-						<div class="box box-primary box-special-p">
-							<div class="box-header">
-								<h3 class="box-title">Search Now!</h3>
-							</div>
-							<!-- /.box-header -->
-							<!-- form start -->
-							<form role="form">
-								<div class="box-body">
-									<div class="form-group box-content-special">
-										<input type="number" class="form-control" 
-										id="in-postalcode"
-											placeholder="Enter postal code">
-									</div>
-									<div class="form-group box-content-special">
-										<select class="form-control">
-											<option>Choose the tax professional's speciality</option>
-											<option>option 2</option>
-											<option>option 3</option>
-											<option>option 4</option>
-											<option>option 5</option>
-										</select>
-									</div>
-									<div class="form-group box-content-special">
-										<button id="homepage-mainsearch-btn" type="submit" class="btn btn-primary">Search</button>
-									</div>
-								</div>
-								<!-- /.box-body -->
-
-							</form>
-						</div>
-					</div>
-				</div>
+			{{> mainPageSearchTemplate}}
             </div>
         </div>
     </section>
+
     <section id="home-buttons" class="text-center">
     	<div class="container wow animated bounceIn">
 		<div class="row">

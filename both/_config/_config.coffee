@@ -1,7 +1,7 @@
 @Config =
 	name: 'Taxmarkets'
 	title: 'Find Professional Tax Help. Fast.'
-	subtitle: 'A dedicated marketplace to find professional tax and financial advice near you.'
+	subtitle: 'Dont wait till the tax season to plan your finances and taxes. Finding the right advisor and booking appointments with their office has never been easier.'
 	logo: ->
 		'<b>' + @name + '</b>'
 	footer: ->

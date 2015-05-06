@@ -3,6 +3,7 @@
     <div id="search-meta">
       {{#if isLoading}}
         searching ...
+        {{> spinner}}
       {{/if}}
     </div>
     <div class="col-md-9"> <!-- column 9 -->
@@ -59,14 +60,15 @@
 
 <template name="searchMetaDataHead">
 	<h3 class="panel-title">
-		{{#if getProviderCount}}
+		{{#if isLoading}}
+			Finding....
+			{{> spinner}}
+			
+		{{else}}
 			{{getProviderCount}} matches found
 			{{#if getQueryDetails}}
 			 for {{getQueryDetails}} tax and financial professionals
 			{{/if}}
-		{{else}}
-			Finding....
-			
 		{{/if}}
 	</h3>
 </template>

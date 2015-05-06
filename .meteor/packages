@@ -51,3 +51,4 @@ external-file-loader
 dburles:google-maps
 mrt:googlemaps
 yogiben:autoform-map
+sacha:spin

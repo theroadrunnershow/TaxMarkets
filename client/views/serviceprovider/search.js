@@ -68,8 +68,26 @@ Template.searchResult.helpers({
 		if (GoogleMaps.loaded() && ServiceProviderSearch.getMetadata()) {
 			// Map initialization options
 			// server is returning searchCenterCoords ie. longlat in meta data
-			var lat = (ServiceProviderSearch.getMetadata().searchCenterCoords)[1];
-			var lng = (ServiceProviderSearch.getMetadata().searchCenterCoords)[0];
+			var lat = 0;
+			var lng = 0;
+			try{
+				if(ServiceProviderSearch.getMetadata().searchCenterCoords) {
+					lat = (ServiceProviderSearch.getMetadata().searchCenterCoords)[1];
+					lng = (ServiceProviderSearch.getMetadata().searchCenterCoords)[0];
+				} else {
+					if (navigator.geolocation) {
+						navigator.geolocation.getCurrentPosition(function(position) {
+							lat=position.coords.latitude;
+							lng=position.coords.longitude;
+							
+						});
+						}
+				}
+			
+			} catch(err) {
+				lat=0;
+				lng=0;
+			}
 			return {
 				center : new google.maps.LatLng(Number(lat), Number(lng)),
 				zoom : 10
@@ -115,24 +133,30 @@ Template.searchResult.rendered = function() {
 			options.userLat = position.coords.latitude;
 			options.userLng = position.coords.longitude;
 			
-			ServiceProviderSearch.search('',options);
-			//createGMap(options.userLat, options.userLng);
+			//ServiceProviderSearch.search('',options);
 		},
 		function(error) {
 			// Handle non-supported clients?
 		});
 		}
-	
+	console.log("Router.current().params = "+ JSON.stringify(Router.current().params.query));
+	console.log("Router.current().params = "+ (Router.current().params.query)?true:false);
+	if(!AutoForm.validateForm("searchForm")){
+		console.log("yes");
+		
+	}
 };
+
 
 Template.searchBox.events({
 	"submit #searchForm": function() {
+		event.preventDefault();
 		if (AutoForm.validateForm('searchForm')) {
 			//get values from user search form.
 			var e = document.getElementById("specialityDropdown");
 			var specialityText = e.options[e.selectedIndex].text;
 			
-			options.zipcode = document.getElementById("zipcode").value;
+			options.zipcode = document.getElementById("in-postalcode").value;
 			
 			var radiusDropdown = document.getElementById("radius");
 			options.radius = radiusDropdown.options[radiusDropdown.selectedIndex].value;
@@ -149,6 +173,54 @@ Template.searchBox.events({
 				});
 				}
 		}
+	}
+});
+Template.mainPageSearchTemplate.events({
+	"submit #home-search-form" : function(event) {
+		event.preventDefault();
+		var specialityText="";
+		// get values from user search form.
+		try{
+			var e = document.getElementById("specialityDropdown");
+			specialityText = e.options[e.selectedIndex].text;
+			if(specialityText === null || 
+					specialityText === undefined || 
+					specialityText.length === 0 ||
+					specialityText === "What do you need help with?"){
+				specialityText="";
+			}
+		} catch(err){
+			specialityText="";
+		}
+		try{
+			if(document.getElementById("specialityDropdown")){
+				options.zipcode = document.getElementById("in-postalcode").value;
+			}			
+		} catch(err){
+			zipcode=null;
+		}
+		try{
+			var radiusDropdown = document.getElementById("radius");
+			options.radius = radiusDropdown.options[radiusDropdown.selectedIndex].value;
+			if(options.radius === null || options.radius === undefined || options.radius.length === 0){
+				options.radius=100;
+			}
+		} catch(err){
+			radius=100;
+		}
+
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(
+					function(position) {
+						options.userLat = position.coords.latitude;
+						options.userLng = position.coords.longitude;
+						ServiceProviderSearch.search(specialityText, options);
+					}, function(error) {
+						//latlong not set.
+						ServiceProviderSearch.search(specialityText, options);
+					});
+		}
+		Router.go("/serviceproviders");
 	}
 });
 

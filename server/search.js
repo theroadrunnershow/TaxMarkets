@@ -25,7 +25,6 @@ SearchSource.defineSource('serviceproviders', function(chosenSpeciality, options
 	// If user HTML5 location fails, location will not be used to search providers.
 	// What are the options to sort by closest?
 	
-	var queryOptions = {sort: {updatedAt: -1}, limit: 100};
 	console.log("SearchSource.defineSource options.radius " + options.radius);
 	console.log("SearchSource.defineSource options.zipcode " + options.zipcode);
 	console.log("SearchSource.defineSource options.userLat " + options.userLat);
@@ -36,7 +35,6 @@ SearchSource.defineSource('serviceproviders', function(chosenSpeciality, options
 		var chosenSpecialityArray = [];
 		chosenSpecialityArray.push(chosenSpeciality);
 		var selector = { "specialities": { $in: chosenSpecialityArray }, "certifiedBool": "0"};
-		//var foundProviders = ServiceProviders.find(selector, queryOptions).fetch();
 		
 		var foundProviders = ServiceProviders.aggregate(
 				[{ $geoNear: { 
@@ -55,6 +53,7 @@ SearchSource.defineSource('serviceproviders', function(chosenSpeciality, options
 			if((foundProviders[i].location === undefined || 
 					foundProviders[i].location == null)? false : true){
 				console.log("foundProviders location provider"+i+" lat " +foundProviders[i].location.coordinates[0]+" lng " +foundProviders[i].location.coordinates[1]);
+				console.log("Distance: "+foundProviders[i].distance);
 			} else{
 				console.log("foundProviders empty location" );
 			}
@@ -73,8 +72,7 @@ SearchSource.defineSource('serviceproviders', function(chosenSpeciality, options
 					near: {type: 'Point', coordinates: [Number(options.userLng),Number(options.userLat) ]}, 
 					distanceMultiplier:0.001, 
 					distanceField: 'distance', 
-					spherical: true,
-					maxDistance: 100000
+					spherical: true
 					} 
 				}
 				]);
